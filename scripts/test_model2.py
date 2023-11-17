@@ -8,7 +8,7 @@ model = T5ForConditionalGeneration.from_pretrained("model")
 
 
 model.load_state_dict(torch.load(
-    "model/pytorch_model.ot", map_location=torch.device('cpu')))
+    "model/pytorch_model.bin", map_location=torch.device('cpu')))
 model.eval()  # Set the model to evaluation mode
 
 
@@ -30,5 +30,5 @@ def generate_answer(model, tokenizer, input_text, max_length=50):
 tokenizer = T5Tokenizer.from_pretrained("model")
 
 # Test the model
-input_text = "list all files in the directory with root permission"
+input_text = "change html files to mode 644"
 print(generate_answer(model, tokenizer, input_text))
