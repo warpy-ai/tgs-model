@@ -80,7 +80,7 @@ print(answer)
 
 The T5 model was fine-tuned for the NL2Bash task. The training process showed the following characteristics:
 
-![training_analysis.png](https://files.oaiusercontent.com/file-nH1mo7jqf2D6YWCu8TuHsYyg?se=2023-11-18T11%3A33%3A50Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D3599%2C%20immutable&rscd=attachment%3B%20filename%3D0984c57e-14bc-4311-9cf2-9bafc585207a&sig=o3LbwuCYlH6oLhcyrUPnZwfp4ElT7wwYDE2X5CDx2ec%3D)
+![training_analysis.png](https://github.com/warpy-ai/tgs-model/blob/main/plot.png)
 
 - Training Loss: Demonstrated a consistent decrease over time, indicating effective learning and adaptation to the training data.
 - Validation Loss: Also decreased, suggesting good generalization to unseen data.
