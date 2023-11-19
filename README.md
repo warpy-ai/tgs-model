@@ -1,6 +1,8 @@
 # tgs-model
 
-# NL2Bash: Natural Language Interface to Linux Bash
+# Terminal Generative Shell (tgs) Model
+
+## TGS Model implements NL2Bash: Natural Language Interface to Linux Bash
 
 ## Citation
 
