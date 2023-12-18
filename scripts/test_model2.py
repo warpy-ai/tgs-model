@@ -30,5 +30,5 @@ def generate_answer(model, tokenizer, input_text, max_length=50):
 tokenizer = T5Tokenizer.from_pretrained("model")
 
 # Test the model
-input_text = "change html files to mode 644"
+input_text = "list all files in this directory"
 print(generate_answer(model, tokenizer, input_text))
