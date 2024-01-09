@@ -30,5 +30,5 @@ def generate_answer(model, tokenizer, input_text, max_length=50):
 tokenizer = T5Tokenizer.from_pretrained("model")
 
 # Test the model
-input_text = "list all files in this directory"
+input_text = "Remove all *.mp3 files in tmp directory but not in it's subdirectories"
 print(generate_answer(model, tokenizer, input_text))
