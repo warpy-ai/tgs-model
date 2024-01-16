@@ -91,6 +91,14 @@ The T5 model was fine-tuned for the NL2Bash task. The training process showed th
 
 This analysis provides confidence in the model's ability to learn and generalize from the NL2Bash dataset effectively.
 
+### Bias Analysis
+
+tgs_model `v0.1.0` has a bias towards the NL2Bash dataset. The nl2bashdataset has a huge amount of `find` command on top of the others.
+
+![training_analysis.png](https://camo.githubusercontent.com/3d88e1e35b0b2774ad407760a6718e7975e99ede72d687c8149ee100a8c6a62f/687474703a2f2f766963746f7269616c696e2e6e65742f696d672f6769746875622f6e6c32626173682d7574696c6974792d64697374322e706e67)
+
+For the `v0.2.0` model, we will be treating the NL2Bash dataset as a biased dataset. We will be using the [NL2Bash-2](https://github.com/TellinaTool/nl2bash-2) dataset. The dataset is a more balanced dataset with more commands.
+
 ## Contributing
 
 Contributions to improve NL2Bash are welcome. Please read `CONTRIBUTING.md` for guidelines on how to contribute.
