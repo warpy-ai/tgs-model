@@ -1,0 +1,6 @@
+{
+    "1": "{\"invocation\": \"Display the current CPU usage for all processes.\\n\", \"cmd\": \"top\"}",
+    "2": "{\"invocation\": \"List the top 10 memory-consuming processes.\\n\", \"cmd\": \"ps -eo pid,ppid,cmd,%mem --sort=-%mem | head\"}",
+    "3": "{\"invocation\": \"Monitor real-time CPU load every 2 seconds.\\n\", \"cmd\": \"top -n 0.1 -s 2\"}",
+    "5": "{\"invocation\": \"List all running processes owned by a specific user.\\n\", \"cmd\": \"ps -u USERNAME\"}"
+}

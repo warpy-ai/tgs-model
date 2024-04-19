@@ -14,7 +14,7 @@ client = OpenAI(
 # Load the finetune.txt file
 
 with open("data/finetune.txt", "r") as f:
-    lines = f.read()
+    lines = f.readlines()
 
 
 # Example dummy function hard coded to return the same weather
@@ -49,14 +49,29 @@ def run_conversation(line):
         tool_choice="auto",  # auto is default, but we'll be explicit
     )
 
-    print(response)
-    response_message = response.choices[0].message
+    response_message = response.choices[0].message.tool_calls
 
-    return response_message
+    if response_message is None:
+        print("No response")
+        return
+
+    cmd = json.loads(response_message[0].function.arguments)["cmd"]
+
+    newObject = json.dumps({"invocation": line, "cmd": cmd})
+
+    return newObject
 
 
-# print(run_conversation())
+task_command_object = {}
 
-for line in lines[:1]:
-    print("this is line " + line)
-    run_conversation(line)
+for indx, line in enumerate(lines[:5]):
+    commands = run_conversation(line)
+    if commands is not None:
+        task_command_object[str(indx + 1)] = commands
+
+
+with open("data/new-nl2bash-data.json", "w") as f:
+    json.dump(task_command_object, f, indent=4)
+
+
+print("Finished")
