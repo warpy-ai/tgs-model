@@ -1,0 +1,42 @@
+{
+    "1": {
+        "invocation": "Count the total number of files and directories in a given directory path, including subdirectories.",
+        "cmd": ""
+    },
+    "2": {
+        "invocation": "Extract specific lines or columns from a text file using grep, awk, or sed.",
+        "cmd": ""
+    },
+    "3": {
+        "invocation": "Monitor system log files for specific error patterns and send email notifications when detected.",
+        "cmd": ""
+    },
+    "4": {
+        "invocation": "Display the current network interface statistics, including transmitted and received bytes.",
+        "cmd": ""
+    },
+    "5": {
+        "invocation": "List all user accounts and their details on the system.",
+        "cmd": ""
+    },
+    "6": {
+        "invocation": "Kill a process by its process ID (PID).",
+        "cmd": ""
+    },
+    "7": {
+        "invocation": "Monitor system resource usage (CPU, memory, disk, network) in real-time and log the data to a file.",
+        "cmd": ""
+    },
+    "8": {
+        "invocation": "Automate repetitive system administration tasks using a Bash script.",
+        "cmd": ""
+    },
+    "9": {
+        "invocation": "Create a Bash script to archive and compress files or directories into a dated backup file.",
+        "cmd": ""
+    },
+    "10": {
+        "invocation": "Set appropriate file permissions and ownership for sensitive system files and directories.",
+        "cmd": ""
+    }
+}

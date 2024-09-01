@@ -1,6 +1,7 @@
 from typing import TypedDict, Annotated
 from langchain_core.messages import BaseMessage
 import operator
+from logs.generation_logs import logger
 
 # Define the state schema
 
@@ -36,6 +37,8 @@ def update_graph_node(state: AgentState) -> AgentState:
 
 
 def update_graph_with_command(graph, invocation, cmd):
+    # Implement the logic to update the graph with the new command
+    logger.log_graph_update(invocation, cmd)
     # In this implementation, we're not actually updating the graph structure
     # Instead, we're updating the state that will be passed through the graph
     current_state = graph.get_current_state()
