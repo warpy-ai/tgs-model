@@ -1,0 +1,87 @@
+{
+    "seeds": [],
+    "task_descriptions": {
+        "1": {
+            "seed": "File operations",
+            "description": "Delete all files older than 30 days in the /var/log directory and its subdirectories."
+        },
+        "2": {
+            "seed": "text processing",
+            "description": "Extract specific columns or fields from a text file using awk or cut."
+        },
+        "3": {
+            "seed": "system administration",
+            "description": "Monitor the disk usage and alert when the available disk space drops below a specified threshold."
+        },
+        "4": {
+            "seed": "network management",
+            "description": "Display the network interface statistics and active network connections."
+        },
+        "5": {
+            "seed": "user management",
+            "description": "List all users on the system along with their user ID, home directory, and shell."
+        },
+        "6": {
+            "seed": "process management",
+            "description": "Kill a process by its process ID (PID) or name."
+        },
+        "7": {
+            "seed": "system monitoring",
+            "description": "Monitor system resource usage (CPU, memory, disk, network) in real-time and log the statistics to a file."
+        },
+        "8": {
+            "seed": "automation tasks",
+            "description": "Automate repetitive system administration tasks or DevOps workflows using a Bash script."
+        },
+        "9": {
+            "seed": "backup and archiving",
+            "description": "Create a Bash script to compress and archive a specified directory into a tar.gz file with a timestamp in the filename."
+        },
+        "10": {
+            "seed": "security and permissions.",
+            "description": "Change the ownership and permissions of a file or directory to secure it from unauthorized access."
+        }
+    },
+    "commands": {
+        "1": {
+            "invocation": "Delete all files older than 30 days in the /var/log directory and its subdirectories.",
+            "cmd": "find /var/log -type f -mtime +30 -delete"
+        },
+        "2": {
+            "invocation": "Extract specific columns or fields from a text file using awk or cut.",
+            "cmd": "Using awk:\n\nawk '{print $2, $5}' file.txt\n\nUsing cut:\n\ncut -d',' -f2,5 file.txt\n\nor for a Bash script:\n\n#!/bin/bash\n\ninput_file=\"file.txt\"\noutput_file=\"output.txt\"\n\n# Using awk\nawk '{print $2, $5}' \"$input_file\" > \"$output_file\"\n\n# Using cut\n# cut -d',' -f2,5 \"$input_file\" > \"$output_file\""
+        },
+        "3": {
+            "invocation": "Monitor the disk usage and alert when the available disk space drops below a specified threshold.",
+            "cmd": "Here's a Bash script that monitors the disk usage and sends an alert when the available disk space drops below a specified threshold:\n\n```bash\n#!/bin/bash\n\n# Set the desired disk usage threshold (in percent)\nTHRESHOLD=80\n\n# Get the root partition's disk usage\nDISK_USAGE=$(df -h / | awk 'NR==2 {print $5}' | sed 's/%//g')\n\n# Check if the disk usage exceeds the threshold\nif [ \"$DISK_USAGE\" -gt \"$THRESHOLD\" ]; then\n    # Send an alert (replace with your desired notification method)\n    echo \"Warning: Disk usage has exceeded $THRESHOLD%. Current usage: $DISK_USAGE%\" | mail -s \"Disk Space Alert\" your.email@example.com\nfi\n```\n\nThis script performs the following steps:\n\n1. Sets the desired disk usage threshold percentage (e.g., 80%).\n2. Gets the current disk usage percentage for the root partition (`/`) using the `df` command and processes the output with `awk` and `sed`.\n3. Compares the disk usage percentage with the defined threshold.\n4. If the disk usage exceeds the threshold, it sends an alert using the `mail` command (replace `your.email@example.com` with your desired email address).\n\nTo use this script, save it to a file (e.g., `disk_monitor.sh`) and make it executable with `chmod +x disk_monitor.sh`. You can then run it manually or set up a cron job to execute it periodically.\n\nNote: This script assumes that the `mail` command is installed and configured correctly on your system. If you prefer a different notification method, you can modify the alert section accordingly."
+        },
+        "4": {
+            "invocation": "Display the network interface statistics and active network connections.",
+            "cmd": "To display network interface statistics and active network connections, you can use the following Bash script:\n\n#!/bin/bash\n\necho \"Network Interface Statistics:\"\nnetstat -i\n\necho \"Active Network Connections:\"\nnetstat -tn"
+        },
+        "5": {
+            "invocation": "List all users on the system along with their user ID, home directory, and shell.",
+            "cmd": "cat /etc/passwd | awk -F':' '{ print \"User:\"$1, \"UID:\"$3, \"Home:\"$6, \"Shell:\"$7 }'"
+        },
+        "6": {
+            "invocation": "Kill a process by its process ID (PID) or name.",
+            "cmd": "To kill a process by its PID:\n\n```bash\nkill <PID>\n```\n\nTo kill a process by its name:\n\n```bash\n#!/bin/bash\n\nPROCESS_NAME=\"$1\"\n\nif [ -z \"$PROCESS_NAME\" ]; then\n    echo \"Error: Process name not provided.\"\n    exit 1\nfi\n\nPID=$(pgrep \"$PROCESS_NAME\")\n\nif [ -z \"$PID\" ]; then\n    echo \"Error: Process '$PROCESS_NAME' not found.\"\n    exit 1\nfi\n\nkill \"$PID\"\n```\n\nThis Bash script takes the process name as the first argument, finds the process ID (PID) using `pgrep`, and then kills the process using `kill`. If the process name is not provided or the process is not found, it prints an error message."
+        },
+        "7": {
+            "invocation": "Monitor system resource usage (CPU, memory, disk, network) in real-time and log the statistics to a file.",
+            "cmd": "Here's a Bash script that monitors system resource usage (CPU, memory, disk, network) in real-time and logs the statistics to a file:\n\n```bash\n#!/bin/bash\n\n# Set the log file path\nlog_file=\"/path/to/system_stats.log\"\n\n# Function to get system resource usage\nget_system_stats() {\n    # CPU usage\n    cpu_usage=$(top -bn1 | grep \"Cpu(s)\" | awk '{print $2 + $4}')\n\n    # Memory usage\n    mem_usage=$(free -m | awk 'NR==2{printf \"%.2f%%\\n\", $3*100/$2 }')\n\n    # Disk usage\n    disk_usage=$(df -h / | awk 'NR==2{print $5}')\n\n    # Network usage\n    net_rx=$(ifstat -n | awk 'NR==3{print $2}')\n    net_tx=$(ifstat -n | awk 'NR==3{print $4}')\n\n    # Format the output\n    output=\"$(date +'%Y-%m-%d %H:%M:%S') CPU: $cpu_usage% Memory: $mem_usage Disk: $disk_usage Network: RX: $net_rx TX: $net_tx\"\n\n    # Append the output to the log file\n    echo \"$output\" >> \"$log_file\"\n}\n\n# Monitor and log system resource usage every 5 seconds\nwhile true; do\n    get_system_stats\n    sleep 5\ndone\n```\n\nThis script defines a function `get_system_stats` that uses various Linux commands (`top`, `free`, `df`, `ifstat`) to retrieve CPU, memory, disk, and network usage statistics. It then formats the output and appends it to a log file specified by the `log_file` variable.\n\nThe script runs in an infinite loop, executing the `get_system_stats` function and then sleeping for 5 seconds before repeating the process. This way, it continuously monitors and logs the system resource usage in real-time.\n\nNote: You might need to install the `ifstat` package if it's not already present on your system. Additionally, make sure to update the `log_file` path to the desired location where you want to store the log file."
+        },
+        "8": {
+            "invocation": "Automate repetitive system administration tasks or DevOps workflows using a Bash script.",
+            "cmd": "Here's a simple Bash script that can be used to automate various system administration tasks or DevOps workflows:\n\n```bash\n#!/bin/bash\n\n# Function to perform system updates\nupdate_system() {\n    echo \"Updating system packages...\"\n    sudo apt update\n    sudo apt upgrade -y\n}\n\n# Function to check disk space\ncheck_disk_space() {\n    echo \"Checking disk space...\"\n    df -h\n}\n\n# Function to restart services\nrestart_services() {\n    echo \"Restarting services...\"\n    sudo systemctl restart nginx\n    sudo systemctl restart mysql\n}\n\n# Function to create a backup\ncreate_backup() {\n    echo \"Creating backup of /var/log directory...\"\n    tar -czf /tmp/logs_backup_$(date +%Y%m%d).tar.gz /var/log\n}\n\n# Main menu\nwhile true; do\n    echo \"Select an option:\"\n    echo \"1. Update system\"\n    echo \"2. Check disk space\"\n    echo \"3. Restart services\"\n    echo \"4. Create backup\"\n    echo \"5. Exit\"\n    read -p \"Enter your choice: \" choice\n\n    case $choice in\n        1) update_system ;;\n        2) check_disk_space ;;\n        3) restart_services ;;\n        4) create_backup ;;\n        5) exit 0 ;;\n        *) echo \"Invalid choice. Please try again.\" ;;\n    esac\ndone\n```\n\nThis script provides a menu-driven interface with the following options:\n\n1. Update system packages\n2. Check available disk space\n3. Restart services like Nginx and MySQL\n4. Create a backup of the `/var/log` directory\n5. Exit the script\n\nYou can save this script to a file (e.g., `admin_tasks.sh`) and make it executable with `chmod +x admin_tasks.sh`. Then, you can run the script with `./admin_tasks.sh`.\n\nNote: This is a basic example, and you may need to modify the script to suit your specific requirements, such as adding more functions or customizing the existing ones."
+        },
+        "9": {
+            "invocation": "Create a Bash script to compress and archive a specified directory into a tar.gz file with a timestamp in the filename.",
+            "cmd": "#!/bin/bash\n\ndir_to_archive=\"$1\"\nif [ -z \"$dir_to_archive\" ] || [ ! -d \"$dir_to_archive\" ]; then\n    echo \"Usage: $0 <directory_to_archive>\"\n    exit 1\nfi\n\ntimestamp=$(date +%Y%m%d%H%M%S)\narchive_name=\"${dir_to_archive##*/}_$timestamp.tar.gz\"\n\ntar czf \"$archive_name\" \"$dir_to_archive\""
+        },
+        "10": {
+            "invocation": "Change the ownership and permissions of a file or directory to secure it from unauthorized access.",
+            "cmd": "To change the ownership and permissions of a file or directory, you can use the following Bash command or script:\n\nSingle Command:\n\n```\nchown new_owner:new_group file_or_directory && chmod new_permissions file_or_directory\n```\n\nReplace `new_owner` with the desired owner, `new_group` with the desired group, `file_or_directory` with the path to the file or directory, and `new_permissions` with the desired permissions in octal notation (e.g., 644 for read/write for owner, read-only for group and others).\n\nBash Script:\n\n```bash\n#!/bin/bash\n\n# Set the desired owner, group, and permissions\nnew_owner=\"user\"\nnew_group=\"group\"\nnew_permissions=644\n\n# Check if the file/directory exists\nif [ -e \"$1\" ]; then\n    # Change ownership\n    chown \"$new_owner:$new_group\" \"$1\"\n\n    # Change permissions\n    chmod \"$new_permissions\" \"$1\"\n\n    echo \"Ownership and permissions changed for $1\"\nelse\n    echo \"File or directory $1 does not exist\"\nfi\n```\n\nSave this script as a file (e.g., `change_permissions.sh`), make it executable with `chmod +x change_permissions.sh`, and run it with `./change_permissions.sh /path/to/file_or_directory`.\n\nThis script prompts for the file or directory path as an argument, checks if it exists, and then changes the ownership and permissions accordingly."
+        }
+    }
+}

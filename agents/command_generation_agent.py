@@ -21,9 +21,10 @@ model = ChatAnthropic(model_name="claude-3-sonnet-20240229",
 # Create prompt
 command_generation_prompt = ChatPromptTemplate.from_messages([
     ("system", "You are an expert in Bash scripting and Linux command-line operations."),
-    ("human", """Given the following task description: "{description}", generate the appropriate Bash command that accomplishes this task.
+    ("human", """Given the following task description: "{description}", generate the appropriate Bash command or script that accomplishes this task.
     Ensure the command is syntactically correct and commonly used in Linux environments.
-    Provide only the command itself, without any explanation.""")
+    If a single command is not sufficient, provide a short Bash script.
+    Provide only the command or script itself, without any explanation.""")
 ])
 
 # Create chain
@@ -53,7 +54,7 @@ class CommandGenerationAgent:
         state['commands'] = commands
 
         # Save to file
-        with open('data/commands.json', 'w') as f:
+        with open('data/nl2bash_data.json', 'w') as f:
             json.dump(commands, f, indent=4)
 
         print("Bash commands generated and saved to data/nl2bash_data.json")
