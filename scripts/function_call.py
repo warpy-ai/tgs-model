@@ -51,6 +51,8 @@ def run_conversation(line):
 
     response_message = response.choices[0].message.tool_calls
 
+    print("Processed message")
+
     if response_message is None:
         print("No response")
         return
@@ -58,13 +60,14 @@ def run_conversation(line):
     cmd = json.loads(response_message[0].function.arguments)["cmd"]
 
     newObject = json.dumps({"invocation": line, "cmd": cmd})
-
+    print("Finished")
     return newObject
 
 
 task_command_object = {}
 
-for indx, line in enumerate(lines[:5]):
+for indx, line in enumerate(lines):
+    print("started line " + str(indx + 1))
     commands = run_conversation(line)
     if commands is not None:
         task_command_object[str(indx + 1)] = commands
