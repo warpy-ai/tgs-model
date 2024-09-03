@@ -1,6 +1,8 @@
 # tgs-model
 
-# NL2Bash: Natural Language Interface to Linux Bash
+# Terminal Generative Shell (tgs) Model
+
+## TGS Model implements NL2Bash: Natural Language Interface to Linux Bash
 
 ## Citation
 
@@ -80,7 +82,7 @@ print(answer)
 
 The T5 model was fine-tuned for the NL2Bash task. The training process showed the following characteristics:
 
-![training_analysis.png](https://files.oaiusercontent.com/file-nH1mo7jqf2D6YWCu8TuHsYyg?se=2023-11-18T11%3A33%3A50Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D3599%2C%20immutable&rscd=attachment%3B%20filename%3D0984c57e-14bc-4311-9cf2-9bafc585207a&sig=o3LbwuCYlH6oLhcyrUPnZwfp4ElT7wwYDE2X5CDx2ec%3D)
+![training_analysis.png](https://github.com/warpy-ai/tgs-model/blob/main/plot.png)
 
 - Training Loss: Demonstrated a consistent decrease over time, indicating effective learning and adaptation to the training data.
 - Validation Loss: Also decreased, suggesting good generalization to unseen data.
@@ -88,6 +90,14 @@ The T5 model was fine-tuned for the NL2Bash task. The training process showed th
 - Overfitting: No evidence of overfitting was observed, as both training and validation losses decreased concurrently.
 
 This analysis provides confidence in the model's ability to learn and generalize from the NL2Bash dataset effectively.
+
+### Bias Analysis
+
+tgs_model `v0.1.0` has a bias towards the NL2Bash dataset. The nl2bashdataset has a huge amount of `find` command on top of the others.
+
+![training_analysis.png](https://camo.githubusercontent.com/3d88e1e35b0b2774ad407760a6718e7975e99ede72d687c8149ee100a8c6a62f/687474703a2f2f766963746f7269616c696e2e6e65742f696d672f6769746875622f6e6c32626173682d7574696c6974792d64697374322e706e67)
+
+For the `v0.2.0` model, we will be treating the NL2Bash dataset as a biased dataset. We will be using the [NL2Bash-2](https://github.com/TellinaTool/nl2bash-2) dataset. The dataset is a more balanced dataset with more commands.
 
 ## Contributing
 

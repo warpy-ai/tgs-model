@@ -1,0 +1,17 @@
+[package]
+name = "convert-tensor"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+
+[[bin]]
+name = "convert-tensor"
+path = "utils/convert-tensor.rs"
+doc = false
+
+
+[dependencies]
+tch = "0.13"
+rust-bert = "0.21.0"
