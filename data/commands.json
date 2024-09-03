@@ -1,0 +1,42 @@
+{
+    "1": {
+        "invocation": "Count the number of files in a directory and its subdirectories.",
+        "cmd": "find . -type f | wc -l"
+    },
+    "2": {
+        "invocation": "Extract unique words from a text file and count their occurrences.",
+        "cmd": "tr -s '[:space:]' '\\n' < file.txt | sort | uniq -c | sort -rn"
+    },
+    "3": {
+        "invocation": "Monitor and log all failed user login attempts on the system.",
+        "cmd": "tail -f /var/log/auth.log | grep \"Failed password\""
+    },
+    "4": {
+        "invocation": "Display the current network interface statistics.",
+        "cmd": "netstat -i"
+    },
+    "5": {
+        "invocation": "List all user accounts along with their user ID (UID), home directory, and shell.",
+        "cmd": "cut -d: -f1,3,6,7 /etc/passwd"
+    },
+    "6": {
+        "invocation": "Kill a process by its process ID (PID) or name.",
+        "cmd": "To kill a process by its PID:\n\nkill -9 <PID>\n\nTo kill a process by its name:\n\nkillall <process_name>"
+    },
+    "7": {
+        "invocation": "Monitor system resource usage (CPU, memory, disk, network) in real-time and log the statistics to a file.",
+        "cmd": "while true; do top -bn1 | head -n 20 >> system_usage.log; sleep 5; done"
+    },
+    "8": {
+        "invocation": "Automate repetitive system administration tasks using a Bash script.",
+        "cmd": "#!/bin/bash"
+    },
+    "9": {
+        "invocation": "Create a Bash script to archive and compress a specified directory into a dated archive file.",
+        "cmd": "tar -czvf \"$(date +%Y%m%d)-archive.tar.gz\" /path/to/directory/"
+    },
+    "10": {
+        "invocation": "Change the ownership and permissions of a directory and its contents recursively.",
+        "cmd": "chown -R user:group directory && chmod -R 755 directory"
+    }
+}
