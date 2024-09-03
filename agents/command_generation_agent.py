@@ -5,9 +5,11 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 import json
 from logs.generation_logs import logger
+from utils.rate_limiter import RateLimiter
 
 # Load environment variables from .env file
 load_dotenv()
+rate_limiter = RateLimiter(requests_per_minute=50, tokens_per_minute=40000)
 
 # Get the API key from the environment
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
@@ -24,6 +26,7 @@ command_generation_prompt = ChatPromptTemplate.from_messages([
     ("human", """Given the following task description: "{description}", generate the appropriate Bash command or script that accomplishes this task.
     Ensure the command is syntactically correct and commonly used in Linux environments.
     If a single command is not sufficient, provide a short Bash script.
+    It must be a one line command.
     Provide only the command or script itself, without any explanation.""")
 ])
 
@@ -31,49 +34,58 @@ command_generation_prompt = ChatPromptTemplate.from_messages([
 command_generation_chain = command_generation_prompt | model | StrOutputParser()
 
 
-class CommandGenerationAgent:
-    def run(self, state):
-        task_descriptions = state.get('task_descriptions', {})
-        commands = {}
+def load_existing_commands():
+    if os.path.exists('data/commands.json'):
+        with open('data/commands.json', 'r') as f:
+            return json.load(f)
+    return {}
 
-        for idx, item in task_descriptions.items():
-            description = item["description"]
+
+def save_commands_to_file(commands):
+    with open('data/commands.json', 'w') as f:
+        json.dump(commands, f, indent=4)
+
+
+class CommandGenerationAgent:
+    def run(self):
+        # Load seeds from seeds.json
+        with open('data/seeds.json', 'r') as f:
+            seeds = json.load(f)
+
+        existing_commands = load_existing_commands()
+        next_index = str(max(
+            int(key) for key in existing_commands.keys()) + 1) if existing_commands else "1"
+
+        for idx, description in enumerate(seeds):
             print(f"Generating command for task: {description}")
+            estimated_tokens_for_request = 1000  # Example estimation
+            rate_limiter.wait(tokens=estimated_tokens_for_request)
 
             bash_command = command_generation_chain.invoke(
                 {"description": description})
 
+            print(f"Generated command: {bash_command}")
             if bash_command:
-                commands[idx] = {
+                existing_commands[next_index] = {
                     "invocation": description,
                     "cmd": bash_command.strip()
                 }
                 logger.log_command(description, bash_command.strip())
 
-        # Update state
-        state['commands'] = commands
+                # Save immediately after appending
+                save_commands_to_file(existing_commands)
 
-        # Save to file
-        with open('data/nl2bash_data.json', 'w') as f:
-            json.dump(commands, f, indent=4)
+                # Increment the index for the next command
+                next_index = str(int(next_index) + 1)
 
-        print("Bash commands generated and saved to data/nl2bash_data.json")
-        return state
+        print("Bash commands generated and saved to data/commands.json")
+        return existing_commands
 
 
 def run_command_generation():
+    print("Running command generation agent...")
     agent = CommandGenerationAgent()
-    try:
-        with open('data/task_descriptions.json', 'r') as f:
-            task_descriptions = json.load(f)
-    except FileNotFoundError:
-        print(
-            "Warning: data/task_descriptions.json not found. Using empty task descriptions.")
-        task_descriptions = {}
-
-    initial_state = {'task_descriptions': task_descriptions}
-    final_state = agent.run(initial_state)
-    return final_state['commands']
+    return agent.run()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,294 @@
+
+JS (JavaScript)
+HTML/CSS
+Python (PY)
+SQL
+TypeScript (TS)
+Bash/Shell
+Java
+C#
+C++
+C
+PHP
+PowerShell
+Go
+Rust
+Kotlin
+Lua
+Dart
+Assembly
+Ruby
+Swift
+R
+Visual Basic
+MATLAB
+VBA
+Groovy
+Scala
+Perl
+GDScript
+Objective-C
+Elixir
+Haskell
+Delphi
+MicroPython
+Lisp
+Clojure
+Julia
+Zig
+Fortran
+Solidity
+Ada
+Erlang
+F#
+Apex
+Prolog
+OCaml
+Cobol
+Crystal
+Nim
+Zephyr
+PostgreSQL
+MySQL
+SQLite
+Microsoft SQL Server
+MongoDB
+Redis
+MariaDB
+Elasticsearch
+Oracle
+Dynamodb
+Firebase Realtime Database
+Cloud Firestore
+BigQuery
+Microsoft Access
+Supabase
+H2
+Cosmos DB
+Snowflake
+InfluxDB
+Cassandra
+Databricks SQL
+Neo4j
+IBM DB2
+Clickhouse
+Solr
+DuckDB
+Firebird
+Couch DB
+Cockroachdb
+Couchbase
+Presto
+Datomic
+EventStoreDB
+RavenDB
+TiDB
+Amazon Web Services
+Microsoft Azure
+Google Cloud
+Cloudflare
+Firebase
+Vercel
+Digital Ocean
+Heroku
+Netlify
+VMware
+Hetzner
+Supabase
+Linode, now Akamai
+OVH
+Managed Hosting
+Oracle Cloud Infra.
+Render
+Fly.io
+OpenShift
+Databricks
+PythonAnywhere
+Vultr
+OpenStack
+Alibaba Cloud
+IBM Cloud Or Watson
+Scaleway
+Colocation
+Node.js
+React
+jQuery
+Next.js
+Express
+Angular
+ASP.NET CORE
+Vue.js
+ASP.NET
+Flask
+Spring Boot
+Django
+WordPress
+FastAPI
+Laravel
+AngularJS
+Svelte
+NestJS
+Blazor
+Ruby on Rails
+Nuxt.js
+Htmx
+Symfony
+Astro
+Fastify
+Deno
+Phoenix
+Drupal
+Strapi
+CodeIgniter
+Gatsby
+Remix
+Solid.js
+Yii 2
+Play Framework
+Elm
+Raspberry Pi
+Arduino
+GNU GCC
+CMake
+LLVM's Clang
+Cargo
+MSVC
+Ninja
+PlatformIO
+Meson
+QMake
+Catch2
+cppunit
+Boost.Test
+doctest
+SCons
+ZMK
+Micronaut
+build2
+CUTE
+.NET
+NumPy
+Pandas
+.NET Framework
+Spring Framework
+RabbitMQ
+Scikit-Learn
+Torch/PyTorch
+TensorFlow
+Apache Kafka
+Flutter
+Opencv
+React Native
+Qt
+OpenGL
+Electron
+CUDA
+Hugging Face Transformers
+Apache Spark
+SwiftUI
+Keras
+.NET MAUI
+Ruff
+Xamarin
+GTK
+Ionic
+Tauri
+Hadoop
+Cordova
+DirectX
+Capacitor
+OpenCL
+Tidyverse
+Roslyn
+Quarkus
+Ktor
+mlflow
+JAX
+MFC
+Docker
+npm
+Pip
+Homebrew
+Make
+Vite
+Kubernetes
+Yarn
+Webpack
+NuGet
+Maven
+Visual Studio Solution
+Gradle
+MSBuild
+Terraform
+APT
+pnpm
+Composer
+Chocolatey
+Ansible
+Pacman
+Unity 3D
+Podman
+Godot
+Ninja
+Bun
+Google Test
+Unreal Engine
+Ant
+Nix
+Dagger
+Puppet
+Pulumi
+Chef
+Visual Studio Code
+Visual Studio
+IntelliJ IDEA
+Notepad++
+Vim
+Android Studio
+PyCharm
+Jupyter Notebook/JupyterLab
+Neovim
+Sublime Text
+Eclipse
+Xcode
+Nano
+WebStorm
+PhpStorm
+Rider
+DataGrip
+VSCodium
+IPython
+CLion
+Emacs
+Goland
+Netbeans
+RStudio
+Qt Creator
+Code::Blocks
+Kate
+Fleet
+Helix
+Spyder
+RubyMine
+Geany
+Rad Studio
+BBEdit
+Spacemacs
+Windows
+MacOS
+Ubuntu
+Android
+Windows Subsystem for Linux (WSL)
+iOS
+Debian
+Other Linux-based
+Arch
+iPadOS
+Red Hat
+Fedora
+ChromeOS
+Cygwin
+BSD
+AIX
+Solaris
+Haiku

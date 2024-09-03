@@ -20,16 +20,15 @@ model = ChatAnthropic(model_name="claude-3-sonnet-20240229",
 
 # Create prompt
 task_description_prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are an expert in describing Bash scripting tasks. Provide a concise task instruction similar to those found in system administration or DevOps documentation."),
-    ("human", """Generate a concise task instruction for a Bash scripting task related to: {seed}
+    ("system", "You are an expert in Bash scripting, system administration, and DevOps practices."),
+    ("human", """Generate a specific and practical Bash scripting task related to: {seed}
 
-Your response should be a single sentence that clearly describes the task to be performed, similar to the following examples:
-- Display the current CPU usage for all processes.
-- List the top 10 memory-consuming processes.
-- Monitor real-time CPU load every 2 seconds.
-- Show disk read and write statistics.
+Your response should be a single sentence that clearly describes a task to be performed using Bash, similar to the following examples:
+- Create a Bash script to monitor CPU usage and send an alert if it exceeds 90% for more than 5 minutes.
+- Implement a Bash function to recursively search for and delete files older than 30 days in a specified directory.
+- Write a Bash script to automate the process of creating a new Git branch, committing changes, and pushing to a remote repository.
 
-Task instruction:""")
+Task description:""")
 ])
 
 # Create chain
@@ -71,7 +70,8 @@ class TaskDescriptionAgent:
         with open('data/nl2bash_data.json', 'w') as f:
             json.dump(task_command_pairs, f, indent=4)
 
-        print("Task instructions generated and saved.")
+        print(
+            f"Generated {len(task_descriptions)} task descriptions and saved them to data/task_descriptions.json and data/nl2bash_data.json")
         return state
 
 
