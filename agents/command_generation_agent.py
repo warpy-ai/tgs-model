@@ -57,6 +57,12 @@ class CommandGenerationAgent:
             int(key) for key in existing_commands.keys()) + 1) if existing_commands else "1"
 
         for idx, description in enumerate(seeds):
+            # Check if the description already exists
+            if any(cmd['invocation'] == description for cmd in existing_commands.values()):
+                print(
+                    f"Skipping already existing command for task: {description}")
+                continue
+
             print(f"Generating command for task: {description}")
             estimated_tokens_for_request = 1000  # Example estimation
             rate_limiter.wait(tokens=estimated_tokens_for_request)
