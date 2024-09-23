@@ -1,4 +1,5 @@
 import os
+import time
 from dotenv import load_dotenv
 from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import ChatPromptTemplate
@@ -6,6 +7,7 @@ from langchain_core.output_parsers import StrOutputParser
 import json
 from logs.generation_logs import logger
 from utils.rate_limiter import RateLimiter
+from anthropic import InternalServerError, RateLimitError
 
 # Load environment variables from .env file
 load_dotenv()
@@ -65,12 +67,26 @@ class CommandGenerationAgent:
 
             print(f"Generating command for task: {description}")
             estimated_tokens_for_request = 1000  # Example estimation
-            rate_limiter.wait(tokens=estimated_tokens_for_request)
 
-            bash_command = command_generation_chain.invoke(
-                {"description": description})
+            max_retries = 5
+            retry_delay = 5  # seconds
 
-            print(f"Generated command: {bash_command}")
+            for attempt in range(max_retries):
+                try:
+                    rate_limiter.wait(tokens=estimated_tokens_for_request)
+                    bash_command = command_generation_chain.invoke(
+                        {"description": description})
+                    break
+                except (InternalServerError, RateLimitError) as e:
+                    if attempt < max_retries - 1:
+                        print(
+                            f"Error occurred: {e}. Retrying in {retry_delay} seconds...")
+                        time.sleep(retry_delay)
+                    else:
+                        print(
+                            f"Failed to generate command after {max_retries} attempts. Skipping this task.")
+                        continue
+
             if bash_command:
                 existing_commands[next_index] = {
                     "invocation": description,
